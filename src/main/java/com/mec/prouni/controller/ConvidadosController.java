@@ -13,27 +13,29 @@ import com.mec.prouni.model.Convidados;
 @Controller
 @RequestMapping("/convidados")
 public class ConvidadosController {
-	
+
 	@Autowired
 	private Convidados convidados;
-	
+
 	@GetMapping
 	public ModelAndView listar() {
 		ModelAndView modelAndView = new ModelAndView("ListaConvidados");
-		//view and objects
-		modelAndView.addObject("convidados",convidados.findAll());
+		// view and objects
+		modelAndView.addObject("convidados", convidados.findAll());
 		modelAndView.addObject(new Convidado());
 		return modelAndView;
 	}
+
 	@PostMapping
 	public String salvar(Convidado convidado) {
 		this.convidados.save(convidado);
 		return "redirect:/convidados";
 	}
+
 	
-	/*@GetMapping("/convidados")
-	public String listar() {
-		--chama uma pagina
-		return "ListaConvidados";
-	}*/
+
+	/*
+	 * @GetMapping("/convidados") public String listar() { --chama uma pagina return
+	 * "ListaConvidados"; }
+	 */
 }
