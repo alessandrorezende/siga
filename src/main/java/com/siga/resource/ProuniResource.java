@@ -1,7 +1,5 @@
 package com.siga.resource;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,13 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.siga.dao.BasicDAO;
-import com.siga.dao.BasicDAOImpl;
-import com.siga.dao.DAOException;
 import com.siga.model.Curso;
 import com.siga.model.Nota;
 import com.siga.model.Usuario;
-import com.siga.repository.Convidados;
 import com.siga.repository.Notas;
 import com.siga.repository.Usuarios;
 
