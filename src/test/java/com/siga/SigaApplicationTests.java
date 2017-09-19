@@ -1,4 +1,4 @@
-package com.mec.prouni;
+package com.siga;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MecWsApplicationTests {
+public class SigaApplicationTests {
 
 	@Test
 	public void contextLoads() {
