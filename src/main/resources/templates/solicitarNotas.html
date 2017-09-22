@@ -183,7 +183,12 @@
 			</ol>
 			<!-- Example DataTables Card-->
 			<div class="card mb-3">
-			<button type="submit" class="btn btn-primary btn-block">Buscar Notas</button>
+				<form class="form-inline" method="POST" th:action="@{/notas}"
+					style="margin: 20px 0">
+					<div class="form-group">
+					    <button type="submit" class="btn btn-primary btn-block">Buscar Notas</button>
+					</div>
+				</form>
 				<div class="card-header">
 					<i class="fa fa-table"></i> Notas do Conceito Preliminar de Curso (CPC)
 					
@@ -207,32 +212,11 @@
 								</tr>
 							</tfoot>
 							<tbody>
-								<tr>
-									<td>Física</td>
-									<td>3</td>
-									<td>Noite</td>
+								<tr th:each="nota : ${notas}">
+									<td th:text="${nota.curso.nome}"></td>
+									<td th:text="${nota.nota}"></td>
+									<td th:text="${nota.curso.turno}"></td>
 								</tr>
-								<tr>
-									<td>Educação Física</td>
-									<td>4</td>
-									<td>Integral</td>
-								</tr>
-								<tr>
-									<td>Nutrição</td>
-									<td>5</td>
-									<td>Noite</td>
-								</tr>
-								<tr>
-									<td>Matemática</td>
-									<td>3</td>
-									<td>Integral</td>
-								</tr>
-								<tr>
-									<td>Sistemas de Informação</td>
-									<td>4</td>
-									<td>Noite</td>
-								</tr>
-								
 							</tbody>
 						</table>
 					</div>

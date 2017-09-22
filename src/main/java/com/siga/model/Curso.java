@@ -13,9 +13,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @NamedQueries(value = { @NamedQuery(name = "Curso.findAll", query ="SELECT c FROM Curso c") })
 @Table(name = "curso")
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Curso extends AbstractBean {
 
 	@Id
@@ -23,6 +26,7 @@ public class Curso extends AbstractBean {
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
 	private String nome;
+	private String turno;
 	private String duracao;
 	@JoinColumn(name = "instituicao", referencedColumnName = "id", nullable = false)
 	@ManyToOne(optional = false)
@@ -60,4 +64,13 @@ public class Curso extends AbstractBean {
 	public void setInstituicao(Instituicao instituicao) {
 		this.instituicao = instituicao;
 	}
+
+	public String getTurno() {
+		return turno;
+	}
+
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+	
 }

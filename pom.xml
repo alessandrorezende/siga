@@ -60,6 +60,22 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.7</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>popper.js</artifactId>
+			<version>1.12.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery-easing</artifactId>
+			<version>1.3-2</version>
+		</dependency>
+
 		<!-- Importante para referenciar bootstrap e jquery no html -->
 		<dependency>
 			<groupId>org.webjars</groupId>

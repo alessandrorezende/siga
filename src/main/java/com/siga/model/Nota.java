@@ -9,10 +9,16 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Table(name = "nota")
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Nota extends AbstractBean {
 	
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")

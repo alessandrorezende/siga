@@ -1,7 +1,5 @@
 package com.siga.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,8 +7,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Table(name = "instituicao")
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Instituicao extends AbstractBean  {
 	
 	@Id
