@@ -5,41 +5,46 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
-public class Convidado implements Serializable {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-	private static final long serialVersionUID = 1L;
-	
+@Table(name = "perfil")
+@Entity
+@JsonSerialize
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Perfil implements Serializable {
+
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
 	private String nome;
-	private Integer quantidadeAcompanhantes;
-	
-	
+
+	public Perfil(Long id, String nome) {
+		this.setId(id);
+		this.setName(nome);
+	}
+
+	public Perfil() {
+	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
-	public void setNome(String nome) {
+
+	public void setName(String nome) {
 		this.nome = nome;
 	}
-	public Integer getQuantidadeAcompanhantes() {
-		return quantidadeAcompanhantes;
-	}
-	public void setQuantidadeAcompanhantes(Integer quantidadeAcompanhantes) {
-		this.quantidadeAcompanhantes = quantidadeAcompanhantes;
-	}
-	
-	
-
 }

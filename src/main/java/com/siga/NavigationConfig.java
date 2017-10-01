@@ -12,9 +12,10 @@ public class NavigationConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/index").setViewName("index");
-		registry.addViewController("/notas").setViewName("solicita-notas");
-		registry.addViewController("/solicitarNotas").setViewName("solicita-notas");
-		registry.addViewController("/solicitarAprovados").setViewName("solicita-aprovados");
+		registry.addViewController("/register").setViewName("register");
+		registry.addViewController("/forgotpassword").setViewName("forgot-password");
+		registry.addViewController("/solicitarNotas").setViewName("solicitar-notas");
+		registry.addViewController("/solicitarAprovados").setViewName("solicitar-aprovados");
 		registry.addViewController("/vagasOciosas").setViewName("vagas-ociosas");
 	}
 

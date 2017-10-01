@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>SiGA</title>
 <!-- Bootstrap core CSS-->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom fonts for this template-->
-<link href="vendor/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
+<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <!-- Page level plugin CSS-->
-<link href="vendor/datatables/dataTables.bootstrap4.css"
-	rel="stylesheet">
+<link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
 </head>
@@ -27,32 +23,43 @@
 
 	<div th:replace="fragments/navbar :: navbar"></div>
 
+	<div th:replace="fragments/alert :: alert"></div>
+	<!-- <button type="submit" class="btn btn-primary btn-block"
+						data-toggle="modal" data-target="#alertModal">Buscar
+						Notas</button> -->
+
+
 	<div class="content-wrapper">
 		<div class="container-fluid">
 			<!-- Breadcrumbs-->
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Integração MEC</a></li>
-				<li class="breadcrumb-item active">Solicitar notas do Conceito
-					Preliminar de Curso (CPC)</li>
+				<li class="breadcrumb-item">
+					<a href="#">Integração MEC</a>
+				</li>
+				<li class="breadcrumb-item active">Solicitar notas do Conceito Preliminar de Curso (CPC)</li>
 			</ol>
 			<!-- Example DataTables Card-->
 			<div class="card mb-3">
-				<form class="form-inline" method="POST" th:action="@{/notas}"
-					style="margin: 20px 0">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block">Buscar
-							Notas</button>
+
+				<form class="form-inline" method="POST" th:action="@{/solicitarNotas}">
+
+					<button type="submit" class="btn btn-primary btn-block">Buscar Notas</button>
+					<div class="msg-erro" th:if="${msgErro}">
+						<p th:text="${msgErro}" />
 					</div>
+					<div class="msg-sucesso" th:if="${msgSucesso}">
+						<p th:text="${msgSucesso}" />
+					</div>
+
 				</form>
 				<div class="card-header">
-					<i class="fa fa-table"></i> Notas do Conceito Preliminar de Curso
-					(CPC)
+					<i class="fa fa-table"></i>
+					Notas do Conceito Preliminar de Curso (CPC)
 
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 							<thead>
 								<tr>
 									<th>Curso</th>
@@ -77,8 +84,7 @@
 						</table>
 					</div>
 				</div>
-				<div class="card-footer small text-muted">Atualizado ontem as
-					11:59 PM</div>
+				<div class="card-footer small text-muted">Atualizado ontem as 11:59 PM</div>
 			</div>
 		</div>
 

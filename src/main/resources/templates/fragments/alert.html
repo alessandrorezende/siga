@@ -5,7 +5,7 @@
   </head>
   <body>
 <!-- Logout Modal-->
-	<div th:fragment="logout" class="modal fade" id="exampleModal"
+	<div th:fragment="alert" class="modal fade" id="alertModal"
 		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -18,8 +18,9 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Selecione "Logout" se você quer
-					sair do sistema.</div>
+				<div class="modal-body">
+				<p th:text="${msgSucesso}">Exception message</p>
+				</div>
 				<div class="modal-footer">
 					<form th:action="@{/logout}" method="post">
 						<button class="btn btn-secondary" type="button"

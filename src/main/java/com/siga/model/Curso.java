@@ -1,6 +1,6 @@
 package com.siga.model;
 
-
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,12 +14,14 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@NamedQueries(value = { @NamedQuery(name = "Curso.findAll", query ="SELECT c FROM Curso c") })
+@NamedQueries(value = { @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c") })
 @Table(name = "curso")
 @Entity
+@JsonSerialize
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Curso extends AbstractBean {
+public class Curso implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "increment")
@@ -28,10 +30,14 @@ public class Curso extends AbstractBean {
 	private String nome;
 	private String turno;
 	private String duracao;
+	private int vagas;
 	@JoinColumn(name = "instituicao", referencedColumnName = "id", nullable = false)
 	@ManyToOne(optional = false)
 	private Instituicao instituicao;
 
+	public Curso() {
+		instituicao = new Instituicao();
+	}
 
 	public Long getId() {
 		return id;
@@ -72,5 +78,13 @@ public class Curso extends AbstractBean {
 	public void setTurno(String turno) {
 		this.turno = turno;
 	}
-	
+
+	public int getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(int vagas) {
+		this.vagas = vagas;
+	}
+
 }

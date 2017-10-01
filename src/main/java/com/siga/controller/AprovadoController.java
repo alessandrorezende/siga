@@ -13,50 +13,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.siga.model.Aluno;
 import com.siga.model.Instituicao;
-import com.siga.model.Nota;
+import com.siga.repository.Alunos;
 import com.siga.repository.Instituicoes;
-import com.siga.repository.Notas;
 import com.siga.rest.RequestHandler;
 
 @Controller
-@RequestMapping("/solicitarNotas")
-public class NotaController {
+@RequestMapping("/solicitarAprovados")
+public class AprovadoController {
 
 	private static final String nomeIntituicao = "Puc Minas";
-	private static final Logger log = LoggerFactory.getLogger(NotaController.class);
+	private static final Logger log = LoggerFactory.getLogger(AprovadoController.class);
 
 	@Autowired
-	private Notas notas;
+	private Alunos alunos;
 	@Autowired
 	private Instituicoes instiuicoes;
 
 	private RestTemplate restTemplate = new RestTemplate();
 
-	ModelAndView modelAndView = new ModelAndView("solicitar-notas");
+	ModelAndView modelAndView = new ModelAndView("solicitar-aprovados");
 
 	@GetMapping
-	public ModelAndView notasCPCView() {
-		modelAndView.addObject("notas", notas.findAll());
+	public ModelAndView aprovadosView() {
+		modelAndView.addObject("aprovados", alunos.findByAprovadoProuni(true));
 		return modelAndView;
 	}
 
 	@PostMapping
-	public String findNotasCPC() {
+	public String findAprovados() {
 		try {
-			log.info("Enviando requisição Notas CPC.");
+			log.info("Enviando requisição aprovados PROUNI.");
 
 			Instituicao instituicao = instiuicoes.findByNome(nomeIntituicao);
-			ResponseEntity<Nota[]> notasList = restTemplate.exchange(
-					RequestHandler.getURINotas() + "?instituicao=" + instituicao.getNome() + "&hashid="
+			ResponseEntity<Aluno[]> aprovadosList = restTemplate.exchange(
+					RequestHandler.getURIAprovados() + "?instituicao=" + instituicao.getNome() + "&hashid="
 							+ instituicao.getHashId(),
 					HttpMethod.GET,
-					new HttpEntity<Nota>(RequestHandler.createHeaders(instituicao.getNome(), instituicao.getHashId())),
-					Nota[].class);
+					new HttpEntity<Aluno>(RequestHandler.createHeaders(instituicao.getNome(), instituicao.getHashId())),
+					Aluno[].class);
 
-			for (Nota nota : notasList.getBody()) {
-				log.info("Salvando Notas CPC enviada pelo MEC.");
-				notas.save(nota);
+			for (Aluno aprovado : aprovadosList.getBody()) {
+				log.info("Salvando aprovado PROUNI enviada pelo MEC.");
+				aprovado.setAprovadoProuni(true);
+				alunos.save(aprovado);
 			}
 			modelAndView.addObject("msgSucesso", "Busca realizada com sucesso!");
 			modelAndView.addObject("msgErro", "");
@@ -66,7 +67,7 @@ public class NotaController {
 			modelAndView.addObject("msgSucesso", "");
 		}
 
-		return "redirect:/solicitarNotas";
+		return "redirect:/solicitarAprovados";
 	}
 
 }

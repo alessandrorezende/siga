@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -14,22 +16,27 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@Table(name = "nota")
+@NamedQueries(value = { @NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a") })
+@Table(name = "aluno")
 @Entity
 @JsonSerialize
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Nota implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Aluno implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
-	private double nota;
+	private String nome;
+	private String idade;
+	private boolean aprovadoProuni;
 	@JoinColumn(name = "curso", referencedColumnName = "id", nullable = false)
 	@ManyToOne(optional = false)
 	private Curso curso;
+
+	public Aluno() {
+		curso = new Curso();
+	}
 
 	public Long getId() {
 		return id;
@@ -37,6 +44,22 @@ public class Nota implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getIdade() {
+		return idade;
+	}
+
+	public void setIdade(String idade) {
+		this.idade = idade;
 	}
 
 	public Curso getCurso() {
@@ -47,11 +70,12 @@ public class Nota implements Serializable {
 		this.curso = curso;
 	}
 
-	public double getNota() {
-		return nota;
+	public boolean isAprovadoProuni() {
+		return aprovadoProuni;
 	}
 
-	public void setNota(double nota) {
-		this.nota = nota;
+	public void setAprovadoProuni(boolean aprovadoProuni) {
+		this.aprovadoProuni = aprovadoProuni;
 	}
+
 }
