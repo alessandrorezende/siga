@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.siga.model.Convidado;
 import com.siga.model.Instituicao;
 import com.siga.model.Nota;
@@ -48,20 +47,25 @@ public class NotaController {
 	private Instituicoes instiuicoes;
 	@Autowired
 	private Usuarios usuarios;
-	
+
 	private RestTemplate restTemplate = new RestTemplate();
 
 	@PostMapping
 	public String findNotasCPC() {
-		
-		Instituicao  instituicao =  instiuicoes.findByNome(nomeIntituicao);
-		Usuario usuario = usuarios.getOne(1l);
-		ResponseEntity<Nota[]> notasList = restTemplate.exchange(
-				RequestHandler.getURI() + "?instituicao=" + instituicao.getNome() + "&hashid=" + usuario.getHashId(), HttpMethod.GET,
-				new HttpEntity<Nota>(RequestHandler.createHeaders("alessandro", "123")), Nota[].class);
+		try {
+			Instituicao instituicao = instiuicoes.findByNome(nomeIntituicao);
+			Usuario usuario = usuarios.getOne(1l);
+			ResponseEntity<Nota[]> notasList = restTemplate.exchange(
+					RequestHandler.getURI() + "?instituicao=" + instituicao.getNome() + "&hashid="
+							+ usuario.getHashId(),
+					HttpMethod.GET, new HttpEntity<Nota>(RequestHandler.createHeaders("alessandro", "123")),
+					Nota[].class);
 
-		for (Nota nota : notasList.getBody()) {
-			notas.save(nota);
+			for (Nota nota : notasList.getBody()) {
+				notas.save(nota);
+			}
+		} catch (Exception e) {
+
 		}
 
 		return "redirect:/notas";

@@ -2,12 +2,11 @@ package com.siga;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.spring4.SpringTemplateEngine;
 
-import com.siga.model.Usuario;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Controller
 @SpringBootApplication
@@ -17,19 +16,10 @@ public class SigaApplication {
 		SpringApplication.run(SigaApplication.class, args);
 	}
 	
-	
-	@RequestMapping("/")
-	public ModelAndView login() {
-		ModelAndView modelAndView = new ModelAndView("login");
-		modelAndView.addObject(new Usuario());
-		return modelAndView;
-	}
-	
-
-	@RequestMapping("/index")
-	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView("index");
-		modelAndView.addObject(new Usuario());
-		return modelAndView;
-	}
+	/*@Bean
+	public SpringTemplateEngine templateEngine() {
+	    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+	    templateEngine.addDialect(new LayoutDialect());
+	    return templateEngine;
+	}*/
 }

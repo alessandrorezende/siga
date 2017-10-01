@@ -1,4 +1,4 @@
-package com.siga.repository;
+package com.siga.old;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
